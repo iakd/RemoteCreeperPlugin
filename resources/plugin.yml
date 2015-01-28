@@ -1,0 +1,4 @@
+name: RemoteCreeperPlugin
+main: com.iakd.remotecreeper.RemoteCreeper
+version: 0.1
+description: Let creepers explode with a remote!
