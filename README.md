@@ -8,8 +8,8 @@ Let creepers explode with a remote!
 - Copy the jar from dist/ into your plugin-Folder
 - Requires Java 7
 
-#Bukkit Version:
-- Requires  1.8
+#Bukkit
+- Requires version  1.8
 
 #Crafting Recipe:
 - First horizontal line: Block of Redstone middle
