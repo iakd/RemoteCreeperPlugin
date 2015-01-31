@@ -1,0 +1,4 @@
+config:
+   cooldown: 5
+   range: 15
+   burstIntensity: 3

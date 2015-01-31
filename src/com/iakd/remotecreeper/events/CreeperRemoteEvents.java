@@ -21,10 +21,17 @@ import com.iakd.remotecreeper.items.CreeperRemoteItemStack;
 public class CreeperRemoteEvents implements Listener {
 
 	private final Plugin plugin;
+	private final long cooldown;
+	private final int range;
+	private final float burstIntensity;
 	private HashMap<UUID, Long> cooldownMap = new HashMap<UUID, Long>();
 
 	public CreeperRemoteEvents(Plugin plugin) {
 		this.plugin = plugin;
+		cooldown = plugin.getConfig().getLong("config.cooldown") * 1000;
+		range = plugin.getConfig().getInt("config.range");
+		burstIntensity = plugin.getConfig().getInt("config.burstIntensity");
+
 	}
 
 	@EventHandler
@@ -52,7 +59,8 @@ public class CreeperRemoteEvents implements Listener {
 			boolean allowUse = false;
 			Long useTime = cooldownMap.get(evt.getPlayer().getUniqueId());
 
-			if (useTime == null || System.currentTimeMillis() - useTime > 5000) {
+			if (useTime == null
+					|| System.currentTimeMillis() - useTime > cooldown) {
 				allowUse = true;
 			}
 
@@ -66,11 +74,10 @@ public class CreeperRemoteEvents implements Listener {
 							public void run() {
 								Player p = evt.getPlayer();
 								p.sendMessage(ChatColor.GRAY
-										+ "[Creeper Remote] "
-										+ ChatColor.GREEN
+										+ "[Creeper Remote] " + ChatColor.GREEN
 										+ "Sending signal.");
-								List<Entity> entities = p.getNearbyEntities(15,
-										15, 15);
+								List<Entity> entities = p.getNearbyEntities(
+										range, range, range);
 								for (Entity e : entities) {
 									if (e instanceof Creeper) {
 										final Creeper creeper = (Creeper) e;
@@ -90,7 +97,7 @@ public class CreeperRemoteEvents implements Listener {
 																creeper.getWorld()
 																		.createExplosion(
 																				creeper.getLocation(),
-																				3F);
+																				burstIntensity);
 																creeper.damage(999F);
 
 															}

@@ -11,10 +11,16 @@ public class RemoteCreeper extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		loadConfig();
 		addCustomRecipes();
 		registerEvents();
 	}
 
+	protected void loadConfig() {
+		this.getConfig().options().copyDefaults(true);
+		saveConfig();
+	}
+	
 	protected void registerEvents() {
 		this.getServer().getPluginManager()
 				.registerEvents(new CreeperRemoteEvents(this), this);
