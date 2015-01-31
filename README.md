@@ -6,6 +6,7 @@ Let creepers explode with a remote!
 
 #Installation
 - Copy the jar from dist/ into your plugin-Folder
+- Requires Java 7
 
 #Bukkit Version:
 - Requires  1.8
